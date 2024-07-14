@@ -1,3 +1,5 @@
+import { createUser } from "../lib/action";
+
 export default function Signup() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -5,22 +7,35 @@ export default function Signup() {
         <h2 className="mt-6 text-center text-2xl font-bold text-gray-900">
           Sign up
         </h2>
-        <form className="px-6 py-8 space-y-6" action="#" method="POST">
+        <form className="px-6 py-8 space-y-6" action={createUser} method="POST">
           <div>
             <label
-              htmlFor="email"
+              htmlFor="name"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Email address
+              Name
             </label>
             <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
+              id="name"
+              name="name"
+              type="name"
               required
               className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50 focus:outline-none"
-              // border 클래스를 추가하여 border를 명시적으로 지정합니다.
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="userId"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              User ID
+            </label>
+            <input
+              id="userId"
+              name="userId"
+              type="userId"
+              required
+              className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50 focus:outline-none"
             />
           </div>
           <div>
@@ -34,12 +49,11 @@ export default function Signup() {
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
               required
               className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50 focus:outline-none"
-              // border 클래스를 추가하여 border를 명시적으로 지정합니다.
             />
           </div>
+
           <div>
             <button
               type="submit"
