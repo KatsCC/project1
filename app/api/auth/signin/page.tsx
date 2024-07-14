@@ -3,9 +3,9 @@
 import { signIn } from "next-auth/react";
 
 export default function SignIn() {
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.target);
+    const data = new FormData(event.currentTarget);
     await signIn("credentials", {
       redirect: true,
       userId: data.get("userId"),
@@ -16,7 +16,7 @@ export default function SignIn() {
 
   return (
     <form
-      action={handleSubmit}
+      onSubmit={handleSubmit}
       className="min-h-screen flex items-center justify-center bg-gray-100"
     >
       <input type="userId" name="userId" placeholder="userId" required />
