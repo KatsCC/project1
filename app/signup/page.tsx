@@ -7,7 +7,7 @@ export default function Signup() {
         <h2 className="mt-6 text-center text-2xl font-bold text-gray-900">
           Sign up
         </h2>
-        <form className="px-6 py-8 space-y-6" action={createUser} method="POST">
+        <form className="px-6 py-8 space-y-6" action={createUser}>
           <div>
             <label
               htmlFor="name"
