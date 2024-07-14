@@ -16,21 +16,21 @@ export default function Profile() {
 }
 
 // 서버사이드 렌더링을 위해 세션 정보를 프리페치합니다.
-export async function getServerSideProps(
-  context: GetSessionParams | undefined
-) {
-  const session = await getSession(context);
+// export async function getServerSideProps(
+//   context: GetSessionParams | undefined
+// ) {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "api/auth/signin",
-        permanent: false,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "api/auth/signin",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: { session },
-  };
-}
+//   return {
+//     props: { session },
+//   };
+// }
