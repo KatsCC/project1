@@ -1,33 +1,20 @@
-import { getSession, GetSessionParams } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
-export default function Profile({ session }: any) {
-  if (!session) {
+export default function Profile() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
     return <p>Loading...</p>;
+  }
+
+  if (!session) {
+    return <p>You are not logged in.</p>;
   }
 
   return (
     <div>
       <h1>Welcome</h1>
-      <p>Email: {session.userData.name}</p>
+      <p>Email</p>
     </div>
   );
-}
-
-export async function getServerSideProps(
-  context: GetSessionParams | undefined
-) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/api/auth/signin",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
 }
