@@ -19,7 +19,7 @@ export async function createUser(formData: FormData) {
   };
 
   try {
-    await sql`INSERT INTO userData (userId, name, password) VALUES (${userId}, ${name}, ${password})`;
+    await sql`INSERT INTO userdata (userId, name, password) VALUES (${userId}, ${name}, ${password})`;
   } catch (error) {
     return {
       message: "Database Error: Failed to Create User.",

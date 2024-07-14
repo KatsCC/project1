@@ -18,7 +18,7 @@ const handler = NextAuth({
 
           // 사용자의 userId로 사용자 정보를 찾습니다.
           const result = await client.query(
-            "SELECT * FROM userData WHERE userId = $1",
+            "SELECT * FROM userdata WHERE userId = $1",
             [credentials.userId]
           );
 
