@@ -8,8 +8,8 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        userId: { label: "User ID", type: "text" },
-        password: { label: "Password", type: "password" },
+        userid: { label: "userid", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials: any) {
         const client = await db.connect();
@@ -18,8 +18,8 @@ const handler = NextAuth({
 
           // 사용자의 userId로 사용자 정보를 찾습니다.
           const result = await client.query(
-            "SELECT * FROM userdata WHERE userId = $1",
-            [credentials.userId]
+            "SELECT * FROM userdata WHERE userid = $1",
+            [credentials.userid]
           );
 
           const user = result.rows[0];
@@ -30,7 +30,7 @@ const handler = NextAuth({
             (await bcrypt.compare(credentials.password, user.password))
           ) {
             // 사용자가 존재하고 비밀번호가 일치하면 사용자 객체를 반환합니다.
-            return { id: user.id, name: user.name, email: user.userId };
+            return { id: user.id, name: user.name };
           } else {
             // 사용자 정보가 존재하지 않거나 비밀번호가 일치하지 않으면 null을 반환합니다.
             return null;
@@ -39,13 +39,13 @@ const handler = NextAuth({
           console.error("Authorize error:", error);
           return null;
         } finally {
-          await client.release(); // 데이터베이스 연결 해제
+          client.release(); // 데이터베이스 연결 해제
         }
       },
     }),
   ],
   pages: {
-    signIn: "/signin",
+    signIn: "/api/auth/signin",
   },
   session: {
     strategy: "jwt",

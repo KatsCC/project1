@@ -7,7 +7,7 @@ export default function SignIn() {
     event.preventDefault(); // 기본 제출 동작 방지
 
     const formData = new FormData(event.currentTarget);
-    const userId = formData.get("userId") as string;
+    const userId = formData.get("userid") as string;
     const password = formData.get("password") as string;
 
     try {
@@ -27,7 +27,7 @@ export default function SignIn() {
       onSubmit={handleSubmit}
       className="min-h-screen flex items-center justify-center bg-gray-100"
     >
-      <input type="text" name="userId" placeholder="User ID" required />
+      <input type="text" name="userid" placeholder="User ID" required />
       <input type="password" name="password" placeholder="Password" required />
       <button type="submit">Sign In</button>
     </form>
