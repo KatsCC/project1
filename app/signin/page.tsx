@@ -1,7 +1,7 @@
 import { db } from "@vercel/postgres";
 
 const client = await db.connect();
-const result = await client.query("SELECT * FROM userdata WHERE userId = cat");
+const result = await client.query("SELECT * FROM userdata WHERE userid = cat");
 
 export default function Signin() {
   return (
