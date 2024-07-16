@@ -4,8 +4,7 @@ import { sql } from "@vercel/postgres";
 
 async function getUser(userid: string): Promise<User | undefined> {
   try {
-    const user =
-      await sql<User>`SELECT * FROM userdata WHERE userid='digimon@kkk.com'`;
+    const user = await sql<User>`SELECT * FROM userdata WHERE userid=${userid}`;
     console.log(user);
     console.log(user.rows[0]);
     return user.rows[0];
@@ -16,7 +15,7 @@ async function getUser(userid: string): Promise<User | undefined> {
 }
 
 export default async function Login() {
-  const user = await getUser("1");
+  const user = await getUser("digimon@kkk.com");
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="sm:w-full sm:max-w-sm bg-white shadow-md rounded-md overflow-hidden">
