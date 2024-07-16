@@ -16,17 +16,17 @@ export default function LoginForm() {
           <div>
             <label
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-              htmlFor="email"
+              htmlFor="userid"
             >
-              Email
+              userid
             </label>
             <div className="relative">
               <input
                 className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Enter your email address"
+                id="userid"
+                type="userid"
+                name="userid"
+                placeholder="Enter your userid address"
                 required
               />
             </div>
