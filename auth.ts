@@ -2,14 +2,16 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { z } from "zod";
-import { sql } from "@vercel/postgres";
+import { db, sql } from "@vercel/postgres";
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 
 async function getUser(userid: string): Promise<User | undefined> {
+  const client = db.connect();
   try {
-    const user = await sql<User>`SELECT * FROM userdata WHERE userid=${userid}`;
-    console.log(user);
+    const user = await (
+      await client
+    ).sql<User>`SELECT * FROM userdata WHERE userid=${userid}`;
 
     return user.rows[0];
   } catch (error) {
