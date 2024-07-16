@@ -35,8 +35,12 @@ export async function authenticate(
   prevState: string | undefined,
   formData: FormData
 ) {
+  const { userId, password } = {
+    userId: formData.get("userId")?.toString(),
+    password: formData.get("password")?.toString(),
+  };
   try {
-    await signIn("credentials", formData);
+    await signIn("credentials", { userId, password });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
