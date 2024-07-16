@@ -1,13 +1,11 @@
 "use client";
 
 import { authenticate } from "@/app/lib/action";
-import { useActionState } from "react";
+
+import { useFormState } from "react-dom";
 
 export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useActionState(
-    authenticate,
-    undefined
-  );
+  const [errorMessage, formAction] = useFormState(authenticate, undefined);
   return (
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
@@ -49,9 +47,7 @@ export default function LoginForm() {
               </div>
             </div>
           </div>
-          <button className="mt-4 w-full" aria-disabled={isPending}>
-            Log in
-          </button>
+          <button className="mt-4 w-full">Log in</button>
           <div className="flex h-8 items-end space-x-1">
             {/* Add form errors here */}
             {errorMessage && (
