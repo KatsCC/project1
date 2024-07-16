@@ -6,9 +6,17 @@ import { sql } from "@vercel/postgres";
 import type { User } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 
-async function getUser(userid: string): Promise<User | undefined> {
+interface Userd {
+  id: string;
+  userid: string;
+  name: string;
+  password: string;
+}
+
+async function getUser(userid: string): Promise<Userd | undefined> {
   try {
-    const user = await sql<User>`SELECT * FROM userdata WHERE userid=${userid}`;
+    const user =
+      await sql<Userd>`SELECT * FROM userdata WHERE userid=${userid}`;
 
     return user.rows[0];
   } catch (error) {
