@@ -1,21 +1,6 @@
-import { User } from "next-auth";
 import LoginForm from "../ui/login-form";
-import { sql } from "@vercel/postgres";
-
-async function getUser(userid: string): Promise<User | undefined> {
-  try {
-    const user = await sql<User>`SELECT * FROM userdata WHERE userid=${userid}`;
-    console.log(user);
-    console.log(user.rows[0]);
-    return user.rows[0];
-  } catch (error) {
-    console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.");
-  }
-}
 
 export default async function Login() {
-  const user = await getUser("digimon@kkk.com");
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="sm:w-full sm:max-w-sm bg-white shadow-md rounded-md overflow-hidden">
@@ -25,7 +10,6 @@ export default async function Login() {
 
         <LoginForm></LoginForm>
       </div>
-      <p className="text-3xl">{user.userid}</p>
     </div>
   );
 }
