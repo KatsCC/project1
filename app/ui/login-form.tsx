@@ -4,12 +4,12 @@ import { authenticate } from "@/app/lib/action";
 import { useFormState } from "react-dom";
 
 export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useFormState(
-    authenticate,
-    undefined
-  );
+  //   const [errorMessage, formAction, isPending] = useFormState(
+  //     authenticate,
+  //     undefined
+  //   );
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={authenticate} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={` mb-3 text-2xl`}>Please log in to continue.</h1>
         <div className="w-full">
@@ -26,7 +26,7 @@ export default function LoginForm() {
                 id="userid"
                 type="userid"
                 name="userid"
-                placeholder="Enter your userid address"
+                placeholder="Enter your userid"
                 required
               />
             </div>
@@ -45,7 +45,6 @@ export default function LoginForm() {
                   name="password"
                   placeholder="Enter password"
                   required
-                  minLength={6}
                 />
               </div>
             </div>
