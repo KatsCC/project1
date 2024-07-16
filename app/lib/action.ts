@@ -36,13 +36,16 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    const res: any = await signIn("credentials", {
-      ...Object.fromEntries(formData),
-    });
-    if (!res.ok) {
-      throw new Error("Sign in failed.");
-    }
+    await signIn("credentials", formData);
   } catch (error) {
-    throw new Error("Sign in failed.");
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+    throw error;
   }
 }

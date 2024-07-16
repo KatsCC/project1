@@ -1,28 +1,15 @@
 "use client";
 
 import { authenticate } from "@/app/lib/action";
-import { useState } from "react";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 export default function LoginForm() {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isPending, setIsPending] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsPending(true);
-
-    const formData = new FormData(e.currentTarget);
-    try {
-      await authenticate(undefined, formData);
-    } catch (error: any) {
-      setErrorMessage(error.message);
-    } finally {
-      setIsPending(false);
-    }
-  };
+  const [errorMessage, formAction, isPending] = useActionState(
+    authenticate,
+    undefined
+  );
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={` mb-3 text-2xl`}>Please log in to continue.</h1>
         <div className="w-full">
