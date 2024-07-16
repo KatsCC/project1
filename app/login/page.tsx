@@ -25,7 +25,7 @@ export default async function Login() {
 
         <LoginForm></LoginForm>
       </div>
-      <p className="text-3xl">{user?.name}</p>
+      <p className="text-3xl">{user.userid}</p>
     </div>
   );
 }
