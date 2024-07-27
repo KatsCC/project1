@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { AuthError } from "next-auth";
+import bcrypt from "bcrypt";
 
 const FormSchema = z.object({
   userId: z.string(),
@@ -14,20 +15,19 @@ const FormSchema = z.object({
 });
 
 export async function createUser(formData: FormData) {
-  const { userId, name, password } = {
+  const { userId, name, password }: any = {
     userId: formData.get("userId")?.toString(),
     name: formData.get("name")?.toString(),
     password: formData.get("password")?.toString(),
   };
-
+  const hashedPassword: any = await bcrypt.hash(password, 10);
   try {
-    await sql`INSERT INTO userdata (userId, name, password) VALUES (${userId}, ${name}, ${password})`;
+    await sql`INSERT INTO users (email, name, password) VALUES (${userId}, ${name}, ${hashedPassword})`;
   } catch (error) {
     return {
       message: "Database Error: Failed to Create User.",
     };
   }
-  revalidatePath("/signup");
   redirect("/login");
 }
 
@@ -35,12 +35,8 @@ export async function authenticate(
   prevState: string | undefined,
   formData: FormData
 ) {
-  const { userid, password } = {
-    userid: formData.get("userid"),
-    password: formData.get("password"),
-  };
   try {
-    await signIn("credentials", { userid: userid, password: password });
+    await signIn("credentials", formData);
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
