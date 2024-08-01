@@ -2,7 +2,7 @@
 
 import { GoogleMap, LoadScriptNext, MarkerF } from "@react-google-maps/api";
 
-export default function MapCont() {
+export default function MapCont({ lat, lng }: { lat: number; lng: number }) {
   return (
     <LoadScriptNext
       googleMapsApiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
@@ -21,15 +21,15 @@ export default function MapCont() {
           gestureHandling: "none",
         }}
         center={{
-          lat: 37.56,
-          lng: 126.9774,
+          lat: lat,
+          lng: lng,
         }}
         zoom={16}
       >
         <MarkerF
           position={{
-            lat: 37.56,
-            lng: 126.9774,
+            lat: lat,
+            lng: lng,
           }}
         ></MarkerF>
       </GoogleMap>

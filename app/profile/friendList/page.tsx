@@ -1,33 +1,29 @@
+/* eslint-disable @next/next/no-img-element */
+import { auth } from "@/auth";
 import ListCom from "./ListCom";
+import { getFriend } from "../createPlan/getfriend";
+import AddFriend from "./AddFriend";
+import { getImage } from "../[id]/getItem";
+import { getFriendImage } from "./controlFriend";
+import Image from "next/image";
+import ImageSrc from "./ImageSrc";
 
-export default function friendList() {
+export default async function friendList() {
+  const session = await auth();
+  const friends = await getFriend(session?.user?.id as string);
+  const id = session?.user?.id;
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-      <div className="w-full max-w-md mt-10 p-4 bg-white rounded-lg shadow">
+      <div className="w-full max-w-md mt-10 mb-24 p-4 bg-white rounded-lg shadow">
         <h1 className="text-2xl font-bold text-center border-b border-gray-200 p-6">
           내 친구
         </h1>
+
         <div className="flex justify-around items-center pt-4 border-b border-gray-200 pb-4">
-          <span className="font-semibold">4 명의 친구들</span>
-          <button className="bg-purple-600 text-white px-4 py-2 rounded-lg flex justify-center items-center">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-1"
-            >
-              <path
-                d="M14.2857 6.85715L9.14287 6.85715L9.14287 1.71429L6.85715 1.71429L6.85715 6.85715L1.71429 6.85715L1.71429 9.14287L6.85715 9.14287L6.85715 14.2857L9.14287 14.2857L9.14287 9.14287L14.2857 9.14287L14.2857 6.85715Z"
-                stroke="white"
-                stroke-width="1.37143"
-                stroke-miterlimit="10"
-                stroke-linecap="square"
-              />
-            </svg>
-            친구 추가
-          </button>
+          <span className="font-semibold">{`${friends.length} 명의 친구들`}</span>
+
+          <AddFriend id={id}></AddFriend>
         </div>
         <div className="w-full  mt-6 pb-6 border-b border-gray-200">
           <button className="w-full p-2 bg-purple-600 text-white rounded-lg flex justify-center items-center">
@@ -76,8 +72,18 @@ export default function friendList() {
             받은 친구요청
           </button>
         </div>
+
         <div className="mt-4 ">
-          <ListCom></ListCom>
+          <div className="absolute translate-y-[80.5px] translate-x-[15px]">
+            {friends.map((val: any, idx: number) => {
+              return (
+                <div key={idx} className=" mb-[16.8px]">
+                  <ImageSrc id={val.id}></ImageSrc>
+                </div>
+              );
+            })}
+          </div>
+          <ListCom friend={friends} id={id} />
         </div>
       </div>
     </div>

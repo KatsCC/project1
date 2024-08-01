@@ -3,9 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useEffect, useState } from "react";
-import { uploadDB } from "./uploadDB";
-import { sql } from "@vercel/postgres";
+import { useState } from "react";
 
 export function UploadImage({ session }: any) {
   const [imageBase64, setImageBase64] = useState<string | null>(null);
@@ -32,26 +30,26 @@ export function UploadImage({ session }: any) {
   // formData.append("user_id", id);
 
   return (
-    <form action={uploadDB}>
-      <div>
-        <h1>Upload an Image</h1>
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-        {imageBase64 ? (
-          <div>
-            <h2>Preview:</h2>
-            <img
-              src={imageBase64}
-              alt="Uploaded Preview"
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
-            <input name="image" value={imageBase64} />
-            <input name="user_id" value={session.user.id} />
-            <button type="submit">제출</button>
-          </div>
-        ) : (
-          <p>No image uploaded</p>
-        )}
-      </div>
-    </form>
+    <div className="mb-4">
+      <h1>프로필 사진 수정</h1>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="bg-white"
+      />
+      {imageBase64 ? (
+        <div className="mt-2">
+          <img
+            src={imageBase64}
+            alt="Uploaded Preview"
+            className="w-12 h-12 rounded-full"
+          />
+          <input className="hidden" name="image" value={imageBase64} />
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
   );
 }

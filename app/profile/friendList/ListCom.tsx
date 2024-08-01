@@ -1,8 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useState } from "react";
+import FriendCom from "./FriendCom";
 
-export default function ListCom() {
+export default function ListCom({
+  friend,
+
+  id,
+}: {
+  friend: any;
+
+  id: any;
+}) {
   const [activeTab, setActiveTab] = useState("friends");
 
   return (
@@ -73,18 +82,7 @@ export default function ListCom() {
         ></div>
       </div>
       <div className="mt-6">
-        {activeTab === "friends" ? (
-          <ul>
-            {["김민수", "이영희", "박철수", "정지은"].map((name, index) => (
-              <li key={index} className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full mr-4 bg-gray-400" />
-                <span>{name}</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>그룹 목록이 여기에 표시됩니다.</p>
-        )}
+        {activeTab === "friends" ? <FriendCom friend={friend} /> : <p>그룹</p>}
       </div>
     </>
   );
