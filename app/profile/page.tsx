@@ -30,7 +30,7 @@ export default async function Profile() {
 
   return (
     <div className="h-full-screen bg-gray-200 ">
-      <div className="pb-[20vh] ">
+      <div className="h-screen">
         <div className="flex justify-between border-b border-gray-300 p-5 shadow-lg pl-6 pr-6 bg-white">
           <h1 className="text-2xl font-bold ">예정된 약속</h1>
           <Link href={"/profile/createPlan"}>
@@ -58,43 +58,49 @@ export default async function Profile() {
 
         {/* <ClientProfile session={session} /> */}
 
-        <ul className="bg-white pt-8 pb-6 rounded-xl shadow-md w-full max-w-md mt-12 mx-auto">
-          {plansData
-            .filter((plan, idx) => {
-              const now = new Date();
-              const planDate = new Date(
-                plan.year,
-                plan.month - 1,
-                plan.day,
-                plan.hour,
-                plan.minute
-              );
-              return planDate >= now;
-            })
-            .map((val, idx) => {
-              return (
-                <>
-                  <div key={idx + 100} className="w-[420px] mx-auto">
-                    <Link href={`/profile/${val.id}`}>
-                      <PlanList
-                        image={val.image}
-                        name={val.name}
-                        lat={val.lat}
-                        lng={val.lng}
-                        address={val.address}
-                        detailed_address={val.detailed_address}
-                        textfield={val.textfield}
-                        month={val.month}
-                        day={val.day}
-                        hour={val.hour}
-                        minute={val.minute}
-                        year={val.year}
-                      ></PlanList>
-                    </Link>
-                  </div>
-                </>
-              );
-            })}
+        <ul className="bg-white pt-8 pb-6 rounded-xl shadow-md w-full max-w-md mt-12 mx-auto mb-[90px]">
+          {plansData.length === 0 ? (
+            <p className="text-center font-semibold">
+              아직 아무 예정이 없습니다
+            </p>
+          ) : (
+            plansData
+              .filter((plan, idx) => {
+                const now = new Date();
+                const planDate = new Date(
+                  plan.year,
+                  plan.month - 1,
+                  plan.day,
+                  plan.hour,
+                  plan.minute
+                );
+                return planDate >= now;
+              })
+              .map((val, idx) => {
+                return (
+                  <>
+                    <div key={idx + 100} className="w-[420px] mx-auto">
+                      <Link href={`/profile/${val.id}`}>
+                        <PlanList
+                          image={val.image}
+                          name={val.name}
+                          lat={val.lat}
+                          lng={val.lng}
+                          address={val.address}
+                          detailed_address={val.detailed_address}
+                          textfield={val.textfield}
+                          month={val.month}
+                          day={val.day}
+                          hour={val.hour}
+                          minute={val.minute}
+                          year={val.year}
+                        ></PlanList>
+                      </Link>
+                    </div>
+                  </>
+                );
+              })
+          )}
         </ul>
       </div>
       <ScrollBtn></ScrollBtn>
