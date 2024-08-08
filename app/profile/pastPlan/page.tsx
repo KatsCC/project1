@@ -3,10 +3,30 @@ import { getPlan } from "../getPlan";
 import Link from "next/link";
 import PlanList from "../PlanList";
 import ScrollBtn from "../ScrollBtn";
+import { getFriendImage } from "../friendList/controlFriend";
+import { getName } from "../[id]/getItem";
 
 export default async function pastPlan() {
   const session = await auth();
   const plans = await getPlan(session?.user?.id as string);
+
+  const imagePromises = plans.map(async (val: any) => {
+    const src = await getFriendImage(val.user_id);
+    return src;
+  });
+  const namePromises = plans.map(async (val: any) => {
+    const src = await getName(val.user_id);
+    return src;
+  });
+
+  const imageSrc = await Promise.all(imagePromises);
+  const names = await Promise.all(namePromises);
+
+  const plansData = plans.map((val: any, idx: number) => ({
+    ...val,
+    name: names[idx] || "none",
+    image: imageSrc[idx] || "none",
+  }));
 
   return (
     <>
@@ -16,7 +36,7 @@ export default async function pastPlan() {
         </div>
 
         <ul className="bg-white pt-8 pb-6 rounded-xl shadow-md w-full max-w-md mb-32 mt-12 mx-auto">
-          {plans
+          {plansData
             .filter((plan, idx) => {
               const now = new Date();
               const planDate = new Date(
@@ -34,6 +54,8 @@ export default async function pastPlan() {
                   <div key={idx + 100} className="w-[420px] mx-auto">
                     <Link href={`/profile/${val.id}`}>
                       <PlanList
+                        image={val.image}
+                        name={val.name}
                         lat={val.lat}
                         lng={val.lng}
                         address={val.address}
