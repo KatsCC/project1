@@ -1,3 +1,5 @@
+"use server";
+
 import { sql } from "@vercel/postgres";
 
 export async function getPublicPlan(user_id: string) {

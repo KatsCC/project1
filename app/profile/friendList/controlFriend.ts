@@ -31,8 +31,8 @@ export async function addFriend(formData: FormData) {
 
 export async function getFriendImage(id: any) {
   try {
-    const comment = await sql`SELECT * FROM user_image WHERE user_id=${id}`;
-    return comment.rows[0].image;
+    const image = await sql`SELECT * FROM user_image WHERE user_id=${id}`;
+    return image.rows[0].image;
   } catch (error) {
     return "11";
   }

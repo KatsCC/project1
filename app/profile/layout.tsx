@@ -31,29 +31,29 @@ export default function NavBar({
                 <path
                   d="M16.6607 5.64287V3.07144"
                   stroke={pathName === "/profile" ? "#6D31ED" : "#565D6D"}
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M8.08929 5.64287V3.07144"
                   stroke={pathName === "/profile" ? "#6D31ED" : "#565D6D"}
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M2.94644 9.07144L21.8036 9.07144"
                   stroke={pathName === "/profile" ? "#6D31ED" : "#565D6D"}
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
                 />
                 <path
                   d="M21.8036 5.64285L2.94644 5.64285L2.94644 21.0714L21.8036 21.0714L21.8036 5.64285Z"
                   stroke={pathName === "/profile" ? "#6D31ED" : "#565D6D"}
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
               </svg>
               예정된 약속
@@ -77,54 +77,54 @@ export default function NavBar({
                   stroke={
                     pathName === "/profile/friendList" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M6.55356 15.0714C7.73703 15.0714 8.69642 14.112 8.69642 12.9286C8.69642 11.7451 7.73703 10.7857 6.55356 10.7857C5.3701 10.7857 4.41071 11.7451 4.41071 12.9286C4.41071 14.112 5.3701 15.0714 6.55356 15.0714Z"
                   stroke={
                     pathName === "/profile/friendList" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M21.5536 20.0737C21.5536 19.556 21.3264 19.0631 20.921 18.7417C20.3013 18.2497 19.2264 17.6429 17.6964 17.6429C16.1664 17.6429 15.0916 18.2497 14.4719 18.7417C14.0664 19.0631 13.8393 19.556 13.8393 20.0737V21.0714H21.5536V20.0737Z"
                   stroke={
                     pathName === "/profile/friendList" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M17.6964 15.0714C18.8799 15.0714 19.8393 14.112 19.8393 12.9286C19.8393 11.7451 18.8799 10.7857 17.6964 10.7857C16.5129 10.7857 15.5536 11.7451 15.5536 12.9286C15.5536 14.112 16.5129 15.0714 17.6964 15.0714Z"
                   stroke={
                     pathName === "/profile/friendList" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M12.125 3.92856L12.125 9.07142"
                   stroke={
                     pathName === "/profile/friendList" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M9.55356 6.5L14.6964 6.5"
                   stroke={
                     pathName === "/profile/friendList" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
               </svg>
               친구 목록
@@ -148,54 +148,54 @@ export default function NavBar({
                   stroke={
                     pathName === "/profile/publicPlan" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M6.01787 14.2143C6.96465 14.2143 7.73216 13.4468 7.73216 12.5C7.73216 11.5532 6.96465 10.7857 6.01787 10.7857C5.0711 10.7857 4.30359 11.5532 4.30359 12.5C4.30359 13.4468 5.0711 14.2143 6.01787 14.2143Z"
                   stroke={
                     pathName === "/profile/publicPlan" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M6.01787 21.0714C6.96465 21.0714 7.73216 20.3039 7.73216 19.3571C7.73216 18.4104 6.96465 17.6429 6.01787 17.6429C5.0711 17.6429 4.30359 18.4104 4.30359 19.3571C4.30359 20.3039 5.0711 21.0714 6.01787 21.0714Z"
                   stroke={
                     pathName === "/profile/publicPlan" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M11.1607 5.64285L21.4464 5.64285"
                   stroke={
                     pathName === "/profile/publicPlan" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M11.1607 12.5L21.4464 12.5"
                   stroke={
                     pathName === "/profile/publicPlan" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M11.1607 19.3571L21.4464 19.3571"
                   stroke={
                     pathName === "/profile/publicPlan" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
               </svg>
               모두의 약속
@@ -219,18 +219,18 @@ export default function NavBar({
                   stroke={
                     pathName === "/profile/myProfile" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
                 <path
                   d="M8.33929 7.35716C8.33929 4.99058 10.2584 3.07144 12.625 3.07144C14.9916 3.07144 16.9107 4.99058 16.9107 7.35716C16.9107 9.72373 14.9916 12.5 12.625 12.5C10.2584 12.5 8.33929 9.72373 8.33929 7.35716Z"
                   stroke={
                     pathName === "/profile/myProfile" ? "#6D31ED" : "#565D6D"
                   }
-                  stroke-width="2.05714"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="2.05714"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
               </svg>
               내 정보

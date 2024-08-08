@@ -5,14 +5,34 @@ import Link from "next/link";
 import PlanList from "./PlanList";
 import ScrollBtn from "./ScrollBtn";
 import { getPlan } from "./getPlan";
+import { getFriendImage } from "./friendList/controlFriend";
+import { getName } from "./[id]/getItem";
 
 export default async function Profile() {
   const session = await auth();
   const plans = await getPlan(session?.user?.id as string);
 
+  const imagePromises = plans.map(async (val: any) => {
+    const src = await getFriendImage(val.user_id);
+    return src;
+  });
+  const namePromises = plans.map(async (val: any) => {
+    const src = await getName(val.user_id);
+    return src;
+  });
+
+  const imageSrc = await Promise.all(imagePromises);
+  const names = await Promise.all(namePromises);
+
+  const plansData = plans.map((val: any, idx: number) => ({
+    ...val,
+    name: names[idx] || "none",
+    image: imageSrc[idx] || "none",
+  }));
+
   return (
-    <>
-      <div className="min-h-screen bg-gray-200 ">
+    <div className="h-full-screen bg-gray-200 ">
+      <div className="pb-[20vh] ">
         <div className="flex justify-between border-b border-gray-300 p-5 shadow-lg pl-6 pr-6 bg-white">
           <h1 className="text-2xl font-bold ">예정된 약속</h1>
           <Link href={"/profile/createPlan"}>
@@ -40,8 +60,8 @@ export default async function Profile() {
 
         {/* <ClientProfile session={session} /> */}
 
-        <ul className="bg-white pt-8 pb-6 rounded-xl shadow-md w-full max-w-md mb-32 mt-12 mx-auto">
-          {plans
+        <ul className="bg-white pt-8 pb-6 rounded-xl shadow-md w-full max-w-md mt-12 mx-auto">
+          {plansData
             .filter((plan, idx) => {
               const now = new Date();
               const planDate = new Date(
@@ -59,6 +79,8 @@ export default async function Profile() {
                   <div key={idx + 100} className="w-[420px] mx-auto">
                     <Link href={`/profile/${val.id}`}>
                       <PlanList
+                        image={val.image}
+                        name={val.name}
                         lat={val.lat}
                         lng={val.lng}
                         address={val.address}
@@ -78,6 +100,6 @@ export default async function Profile() {
         </ul>
       </div>
       <ScrollBtn></ScrollBtn>
-    </>
+    </div>
   );
 }

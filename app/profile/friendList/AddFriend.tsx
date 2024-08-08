@@ -31,9 +31,9 @@ export default function AddFriend({ id }: { id: string | undefined }) {
           <path
             d="M14.2857 6.85715L9.14287 6.85715L9.14287 1.71429L6.85715 1.71429L6.85715 6.85715L1.71429 6.85715L1.71429 9.14287L6.85715 9.14287L6.85715 14.2857L9.14287 14.2857L9.14287 9.14287L14.2857 9.14287L14.2857 6.85715Z"
             stroke="white"
-            stroke-width="1.37143"
-            stroke-miterlimit="10"
-            stroke-linecap="square"
+            strokeWidth="1.37143"
+            strokeMiterlimit="10"
+            strokeLinecap="square"
           />
         </svg>
         친구 추가

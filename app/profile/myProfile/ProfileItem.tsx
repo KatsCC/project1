@@ -28,13 +28,21 @@ export default function ProfileItem({
   };
   return (
     <div className="w-full">
-      <p className="font-bold text-2xl m-6 flex items-center border-b-2 border-gray-200 pb-6">
-        <img
-          src={src}
-          alt="profile image"
-          className=" w-12 h-12 rounded-full mr-4"
-        />
-        {name}
+      <p className="font-bold text-2xl m-6 flex items-center border-b-2 border-gray-200 pb-6 justify-between">
+        <span className="flex items-center">
+          <img
+            src={src}
+            alt="profile image"
+            className=" w-12 h-12 rounded-full mr-4"
+          />
+          {name}
+        </span>
+        <button
+          className="bg-green-300 text-white font-semibold p-1 rounded-lg text-base"
+          onClick={openModal}
+        >
+          정보수정
+        </button>
       </p>
       <p className="font-semibold ml-2">{rotate}</p>
       <div className="flex between mt-8">
@@ -67,12 +75,7 @@ export default function ProfileItem({
       >
         로그아웃
       </button>
-      <button
-        className="bg-green-300 text-white font-semibold p-1 rounded-lg ml-[10px] absolute top-0 mt-28 right-14"
-        onClick={openModal}
-      >
-        정보수정
-      </button>
+
       {isModalOpen && (
         <EditProfileModal
           session={session}
@@ -83,4 +86,12 @@ export default function ProfileItem({
       )}
     </div>
   );
+}
+{
+  /* <button
+className="bg-green-300 text-white font-semibold p-1 rounded-lg ml-[10px] absolute top-0 mt-28 right-14"
+onClick={openModal}
+>
+정보수정
+</button> */
 }

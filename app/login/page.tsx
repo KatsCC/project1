@@ -40,9 +40,9 @@ export default async function Login() {
               <path
                 d="M13.1429 11.0989C12.8618 11.7217 12.7275 11.9994 12.3652 12.5503C11.8606 13.3189 11.1486 14.276 10.2663 14.284C9.48234 14.2914 9.2812 13.7743 8.2172 13.78C7.15377 13.7857 6.93149 14.2931 6.14749 14.2857C5.2652 14.2777 4.59149 13.4137 4.08577 12.6446C2.67434 10.4949 2.52692 7.97257 3.39777 6.632C4.01663 5.67886 4.9932 5.12171 5.91149 5.12171C6.84635 5.12171 7.43377 5.63429 8.20692 5.63429C8.95663 5.63429 9.41377 5.12114 10.4943 5.12114C11.3115 5.12114 12.1766 5.56571 12.7938 6.33429C10.7732 7.44171 11.1012 10.3269 13.1429 11.0989Z"
                 stroke="white"
-                stroke-width="1.37143"
-                stroke-miterlimit="10"
-                stroke-linecap="square"
+                strokeWidth="1.37143"
+                strokeMiterlimit="10"
+                strokeLinecap="square"
               />
               <path
                 d="M9.77147 3.11429C10.1429 2.63771 10.4246 1.96514 10.3223 1.27771C9.71547 1.31943 9.0069 1.70514 8.59261 2.208C8.21661 2.66457 7.90632 3.34114 8.0269 3.99943C8.68861 4.02 9.37375 3.62457 9.77147 3.11429Z"
@@ -85,15 +85,15 @@ export default async function Login() {
                 <path
                   d="M2.28577 8L13.7143 8"
                   stroke="white"
-                  stroke-width="1.37143"
-                  stroke-miterlimit="10"
+                  strokeWidth="1.37143"
+                  strokeMiterlimit="10"
                 />
                 <path
                   d="M9.71423 4L13.7142 8L9.71423 12"
                   stroke="white"
-                  stroke-width="1.37143"
-                  stroke-miterlimit="10"
-                  stroke-linecap="square"
+                  strokeWidth="1.37143"
+                  strokeMiterlimit="10"
+                  strokeLinecap="square"
                 />
               </svg>
               회원가입하기

@@ -1,6 +1,7 @@
 "use client";
 
 import { GoogleMap, LoadScriptNext, MarkerF } from "@react-google-maps/api";
+import { useState } from "react";
 
 export default function MapContainer({
   lat,
@@ -10,11 +11,21 @@ export default function MapContainer({
   lng: number;
 }) {
   const googleMapUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+
+  const [loading, setLoading] = useState(true);
+
+  const handleMapLoad = () => {
+    setLoading(false);
+  };
+
   return (
     <div className="relative w-full h-full">
+      {loading && <div className="w-full h-full bg-gray-300 animate-pulse" />}
+
       <LoadScriptNext
         googleMapsApiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
         libraries={["places"]}
+        onLoad={handleMapLoad}
       >
         <GoogleMap
           mapContainerStyle={{

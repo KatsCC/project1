@@ -1,36 +1,33 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import { useState } from "react";
-import { deleteFriend, getFriendImage } from "./controlFriend";
-import ImageSrc from "./ImageSrc";
+import { deleteFriend } from "./controlFriend";
 
 export default function FriendCom({ friend }: { friend: any }) {
-  const list = friend;
   const [selectedFriend, setSelectedFriend] = useState("");
   const [selectedFriendId, setSelectedFriendId] = useState("");
 
   return (
     <ul>
-      {/* <ImageSrc id={"d09578d3-1625-4852-88df-606279fab5ca"} /> */}
-
-      {list.map((val: any, index: any) => {
-        // const src = await getFriendImage(val.id);
-        return (
-          <div
-            key={index}
-            onClick={() => {
-              setSelectedFriend(val.name);
-              setSelectedFriendId(val.id);
-            }}
-          >
-            <li className="flex items-center mb-2 pt-2 pl-4 border-t border-gray-200 cursor-pointer">
-              {/* {<ImageSrc id={}></ImageSrc>} */}
-              <div className="w-12 h-12 bg-white rounded-full" />
-
-              <span className="ml-2 font-semibold">{val.name}</span>
-            </li>
-          </div>
-        );
-      })}
+      {friend.map((val: any, index: any) => (
+        <div
+          key={index}
+          onClick={() => {
+            setSelectedFriend(val.name);
+            setSelectedFriendId(val.id);
+          }}
+        >
+          <li className="flex items-center mb-2 pt-2 pl-4 border-t border-gray-200 cursor-pointer">
+            <img
+              src={val.image}
+              alt="profile"
+              className="w-12 h-12 rounded-full"
+            />
+            <span className="ml-2 font-semibold">{val.name}</span>
+          </li>
+        </div>
+      ))}
       {selectedFriend && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-4 rounded-lg shadow-lg w-[350px]">

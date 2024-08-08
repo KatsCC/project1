@@ -3,7 +3,7 @@
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 
-export async function getItem(id: number | string) {
+export async function getItem(id: number | string | undefined) {
   try {
     const plans = await sql`SELECT * FROM plan WHERE id=${id}`;
     return plans.rows[0];
@@ -12,7 +12,7 @@ export async function getItem(id: number | string) {
   }
 }
 
-export async function getComment(id: number | string) {
+export async function getComment(id: number | string | undefined) {
   try {
     const comment = await sql`SELECT * FROM comment WHERE plan_id=${id}`;
     return comment.rows;
@@ -21,7 +21,7 @@ export async function getComment(id: number | string) {
   }
 }
 
-export async function getName(id: number | string) {
+export async function getName(id: number | string | undefined) {
   try {
     const comment = await sql`SELECT * FROM users WHERE id=${id}`;
 
@@ -31,7 +31,7 @@ export async function getName(id: number | string) {
   }
 }
 
-export async function getImage(id: number | string) {
+export async function getImage(id: number | string | undefined) {
   try {
     const comment = await sql`SELECT * FROM user_image WHERE user_id=${id}`;
     return comment.rows[0].image;
@@ -52,4 +52,33 @@ export async function submitComment(formData: FormData) {
     throw new Error("Failed to fetch DB");
   }
   redirect(`/profile/${plan_id}`);
+}
+
+export async function attend(
+  user_id: number | string,
+  plan_id: number | string
+) {
+  try {
+    await sql`WITH upsert AS (
+    UPDATE attend
+    SET attend = NOT attend
+    WHERE user_id = ${user_id} AND plan_id = ${plan_id}
+    RETURNING * )
+INSERT INTO attend (plan_id, user_id, attend)
+SELECT ${plan_id}, ${user_id}, TRUE
+WHERE NOT EXISTS (SELECT 1 FROM upsert);`;
+  } catch (error) {
+    throw new Error("Failed to fetch DB");
+  }
+  redirect(`/profile/${plan_id}`);
+}
+
+export async function getAttendCount(plan_id: number | string) {
+  try {
+    const people =
+      await sql`SELECT * FROM attend WHERE plan_id=${plan_id} AND attend=TRUE`;
+    return people.rows;
+  } catch (error) {
+    throw new Error("Failed to fetch DB");
+  }
 }
