@@ -79,8 +79,8 @@ export default async function Profile() {
                   <div key={idx + 100} className="w-[420px] mx-auto">
                     <Link href={`/profile/${val.id}`}>
                       <PlanList
-                        image={val.image}
-                        name={val.name}
+                        image={val?.image}
+                        name={val?.name}
                         lat={val.lat}
                         lng={val.lng}
                         address={val.address}
