@@ -104,14 +104,14 @@ export default async function Profile() {
             </li>
           ) : (
             plansData
-              .filter((plan, idx) => {
+              .filter((plan) => {
                 const now = new Date();
                 const planDate = new Date(
                   plan.year,
                   plan.month - 1,
                   plan.day,
                   plan.hour,
-                  plan.minute
+                  plan.minute,
                 );
                 return planDate >= now;
               })
