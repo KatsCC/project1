@@ -55,7 +55,7 @@ export default function ProfileItem({
       <div className="flex between mt-8">
         <div className="w-[45%] h-40 border-4 border-purple-400 rounded-2xl overflow-hidden mr-4">
           <Link href={"/profile"}>
-            <div className="w-full bg-purple-400 text-white text-center p-3 font-bold text-xl">
+            <div className="w-full bg-purple-400 border-1 border-purple-400 text-white text-center p-3 font-bold text-xl">
               예정된 약속
             </div>
             <p className="w-full text-center mx-auto mt-7 text-3xl font-bold text-gray-800 h-full">
@@ -66,7 +66,7 @@ export default function ProfileItem({
 
         <div className="w-[45%] h-40 border-4 border-gray-400 rounded-2xl overflow-hidden">
           <Link href={"/profile/pastPlan"}>
-            <div className="w-full bg-gray-400 text-white text-center p-3 font-bold text-xl">
+            <div className="w-full bg-gray-400 border-1 border-gray-400 text-white text-center p-3 font-bold text-xl">
               지난 약속
             </div>
             <p className="w-full text-center mx-auto mt-7 text-3xl font-bold text-gray-800 h-full">
