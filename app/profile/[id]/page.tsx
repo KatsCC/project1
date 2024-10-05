@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { auth } from "@/auth";
 import Comment from "./Comment";
-import { attend, getAttendCount, getImage, getItem, getName } from "./getItem";
+import { getAttendCount, getImage, getItem, getName } from "./getItem";
 import MapContainer from "./MapContainer";
 import AttendBtn from "./AttendBtn";
 

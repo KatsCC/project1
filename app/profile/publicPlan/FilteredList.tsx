@@ -4,7 +4,6 @@
 import Link from "next/link";
 import { useState, useRef, useEffect, useCallback } from "react";
 import PlanList from "../PlanList";
-import { Plan } from "../page";
 
 interface FilteredData {
   id: number;
@@ -110,8 +109,6 @@ export default function FilteredList({
                     name={val.name}
                     lat={val.lat}
                     lng={val.lng}
-                    address={val.address}
-                    detailed_address={val.detailed_address}
                     textfield={val.textfield}
                     month={val.month}
                     day={val.day}
@@ -131,8 +128,6 @@ export default function FilteredList({
                     name={val.name}
                     lat={val.lat}
                     lng={val.lng}
-                    address={val.address}
-                    detailed_address={val.detailed_address}
                     textfield={val.textfield}
                     month={val.month}
                     day={val.day}

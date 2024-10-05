@@ -1,14 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Session } from "next-auth";
 import { getComment, getImage, getName } from "./getItem";
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  ReactPortal,
-  AwaitedReactNode,
-  Key,
-} from "react";
 import SubmitComment from "./SubmitComment";
 
 export default async function Comment({

@@ -7,6 +7,8 @@ export async function getPublicPlan() {
     const plans = await sql`SELECT * FROM plan WHERE post_all='on'`;
     return plans.rows;
   } catch (error) {
+    console.error(error);
+
     throw new Error("Failed to fetch user.");
   }
 }

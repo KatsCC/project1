@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { auth, signOut } from "@/auth";
+import { auth } from "@/auth";
 import ProfileItem from "./ProfileItem";
-import { UploadImage } from "./UploadImage";
 import { userImage, userName, userRotate } from "./uploadDB";
 import { getPlan } from "../getPlan";
 import { Session } from "next-auth";
@@ -15,7 +14,7 @@ export default async function myProfile() {
   const rotate = await userRotate(session.user.id);
   const name = await userName(session.user.id);
   const plans = await getPlan(session?.user?.id as string);
-  const upcom = plans.filter((plan, idx) => {
+  const upcom = plans.filter((plan) => {
     const now = new Date();
     const planDate = new Date(
       plan.year,
@@ -26,7 +25,7 @@ export default async function myProfile() {
     );
     return planDate >= now;
   }).length;
-  const past = plans.filter((plan, idx) => {
+  const past = plans.filter((plan) => {
     const now = new Date();
     const planDate = new Date(
       plan.year,

@@ -6,8 +6,6 @@ export default function PlanList({
   name,
   lat,
   lng,
-  address,
-  detailed_address,
   textfield,
   month,
   day,
@@ -19,8 +17,6 @@ export default function PlanList({
   name: string;
   lat: number | string;
   lng: number | string;
-  address: string;
-  detailed_address: string;
   textfield: string;
   month: number;
   day: number;

@@ -6,6 +6,8 @@ export async function getPlan(user_id: string) {
       await sql`SELECT * FROM plan WHERE friend_id @> ARRAY[${user_id}]::uuid[] OR user_id = ${user_id}::uuid;`;
     return plans.rows;
   } catch (error) {
+    console.error(error);
+
     throw new Error("Failed to fetch user.");
   }
 }

@@ -7,11 +7,6 @@ import { z } from "zod";
 import { AuthError } from "next-auth";
 import bcrypt from "bcrypt";
 
-const FormSchema = z.object({
-  userId: z.string(),
-  name: z.string(),
-  password: z.string(),
-});
 interface Data {
   userId: string;
   name: string;
@@ -29,7 +24,7 @@ export async function createUser(formData: FormData) {
     await sql`INSERT INTO users (email, name, password) VALUES (${userId}, ${name}, ${hashedPassword})`;
   } catch (error) {
     return {
-      message: "Database Error: Failed to Create User.",
+      message: error,
     };
   }
   redirect("/login");

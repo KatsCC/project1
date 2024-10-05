@@ -124,8 +124,6 @@ export default async function Profile() {
                         name={val.name}
                         lat={val.lat}
                         lng={val.lng}
-                        address={val.address}
-                        detailed_address={val.detailed_address}
                         textfield={val.textfield}
                         month={val.month}
                         day={val.day}

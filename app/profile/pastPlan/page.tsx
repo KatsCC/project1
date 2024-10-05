@@ -39,7 +39,7 @@ export default async function pastPlan() {
 
         <ul className="bg-white pt-8 pb-6 pl-2 pr-2 rounded-xl shadow-md w-full max-w-md mt-12 mx-auto">
           {plansData
-            .filter((plan, idx) => {
+            .filter((plan) => {
               const now = new Date();
               const planDate = new Date(
                 plan.year,
@@ -60,8 +60,6 @@ export default async function pastPlan() {
                         name={val.name}
                         lat={val.lat}
                         lng={val.lng}
-                        address={val.address}
-                        detailed_address={val.detailed_address}
                         textfield={val.textfield}
                         month={val.month}
                         day={val.day}

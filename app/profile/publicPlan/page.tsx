@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use server";
 
-import { auth } from "@/auth";
 import { getPublicPlan } from "./getPublic";
 import Link from "next/link";
-import PlanList from "../PlanList";
 import ScrollBtn from "../ScrollBtn";
 import FilteredList from "./FilteredList";
 import { getFriendImage } from "../friendList/controlFriend";
@@ -12,7 +10,6 @@ import { getName } from "../[id]/getItem";
 import { mapToPlan, Plan } from "../page";
 
 export default async function myProfile() {
-  const session = await auth();
   const queryResult = await getPublicPlan();
   const plans = queryResult.map(mapToPlan);
 

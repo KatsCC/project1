@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
-import { UploadImage } from "./UploadImage";
 import { signOut } from "@/auth";
-import { userImage } from "./uploadDB";
 import { useState } from "react";
 import EditProfileModal from "./EditProfileModal";
 import Link from "next/link";
