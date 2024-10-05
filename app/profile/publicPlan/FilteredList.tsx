@@ -51,7 +51,7 @@ export default function FilteredList({
           plan.month - 1,
           plan.day,
           plan.hour,
-          plan.minute
+          plan.minute,
         );
         return planDate >= now;
       })

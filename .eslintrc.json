@@ -6,7 +6,7 @@
     "plugin:prettier/recommended"
   ],
   "plugins": ["@typescript-eslint"],
-  "rules": { "comma-dangle": "off" },
+  "rules": { "comma-dangle": ["error", "always-multiline"] },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],

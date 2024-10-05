@@ -14,8 +14,6 @@ interface LatLng {
   address: string;
 }
 
-interface Marker extends LatLng {}
-
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
@@ -32,21 +30,26 @@ const GEOCODING_API_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 const fetchAddress = async (lat: number, lng: number): Promise<string> => {
   try {
     const response = await fetch(
-      `${GEOCODING_API_URL}?latlng=${lat},${lng}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`
+      `${GEOCODING_API_URL}?latlng=${lat},${lng}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
     );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
     const data = await response.json();
     if (data.status === "OK" && data.results.length > 0) {
       return data.results[0].formatted_address;
     }
-    return "No address found";
+    return "주소를 찾을 수 없습니다";
   } catch (error) {
-    console.error("Error fetching address:", error);
-    return "Error fetching address";
+    console.error("주소를 가져오는 중 오류 발생:", error);
+    return "주소를 가져오는 중 오류 발생";
   }
 };
 
 export default function Map() {
-  const [markers, setMarkers] = useState<Marker[]>([]);
+  const [markers, setMarkers] = useState<LatLng[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<LatLng>(center);
   const searchBoxRef = useRef<google.maps.places.SearchBox | null>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -68,7 +71,7 @@ export default function Map() {
     const latLng: LatLng = {
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng(),
-      address: place.formatted_address || "No address found",
+      address: place.formatted_address || "주소를 찾을 수 없습니다",
     };
 
     setMarkers([latLng]);
@@ -86,9 +89,9 @@ export default function Map() {
     const address = await fetchAddress(lat, lng);
 
     const latLng: LatLng = {
-      lat: lat,
-      lng: lng,
-      address: address,
+      lat,
+      lng,
+      address,
     };
 
     setMarkers([latLng]);
@@ -105,7 +108,7 @@ export default function Map() {
     <>
       <div className="w-full h-80">
         <LoadScriptNext
-          googleMapsApiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
+          googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY!}
           libraries={["places"]}
         >
           <GoogleMap
@@ -129,13 +132,9 @@ export default function Map() {
               }}
             >
               <div className="hidden">
-                <textarea name="lat" readOnly value={selectedLocation.lat}>
-                  {selectedLocation.lat}
-                </textarea>
-                <textarea name="lng" readOnly value={selectedLocation.lng}>
-                  {selectedLocation.lng}
-                </textarea>
-                <textarea readOnly>{selectedLocation.address}</textarea>
+                <textarea name="lat" readOnly value={selectedLocation.lat} />
+                <textarea name="lng" readOnly value={selectedLocation.lng} />
+                <textarea readOnly value={selectedLocation.address} />
               </div>
             </div>
             <StandaloneSearchBox
@@ -145,7 +144,7 @@ export default function Map() {
               <input
                 type="text"
                 placeholder="입력해서 찾기!"
-                className="box-border border border-transparent max-w-[270px] w-[70%] h-[40px] px-3 rounded-[3px] shadow-md text-[14px] outline-none mx-auto truncate absolute top-[10px] left-1 transform -translate-x-2/1"
+                className="box-border border border-transparent max-w-[270px] w-[70%] h-[40px] px-3 rounded-[3px] shadow-md text-[14px] outline-none mx-auto absolute top-[10px] left-1"
               />
             </StandaloneSearchBox>
           </GoogleMap>
@@ -155,27 +154,11 @@ export default function Map() {
         <textarea
           name="address"
           className="mt-2 font-semibold pl-2 resize-none w-full h-8 pt-1 pointer-events-none"
-          value={`${
-            selectedLocation.address.split(" ")[0] !== "대한민국"
-              ? selectedLocation.address.split(" ")[0]
-              : ""
-          } ${
-            selectedLocation.address.split(" ")[1]
-              ? selectedLocation.address.split(" ")[1]
-              : ""
-          } ${
-            selectedLocation.address.split(" ")[2]
-              ? selectedLocation.address.split(" ")[2]
-              : ""
-          } ${
-            selectedLocation.address.split(" ")[3]
-              ? selectedLocation.address.split(" ")[3]
-              : ""
-          }`}
+          value={selectedLocation.address.split(" ").slice(0, 4).join(" ")}
           aria-label="선택 주소"
-        ></textarea>
+        />
         <input
-          className=" mb-2 border border-gray-300 p-2 w-full rounded-lg font-semibold"
+          className="mb-2 border border-gray-300 p-2 w-full rounded-lg font-semibold"
           type="text"
           placeholder="세부 주소를 입력하세요!"
           name="detailed_address"

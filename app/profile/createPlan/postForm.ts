@@ -21,9 +21,9 @@ interface PostData {
 
 export async function postForm(formData: FormData) {
   const timetext = `${formData.get("month")}월 ${formData.get(
-    "day"
+    "day",
   )}일 ${formData.get("hour")}시 ${formData.get("minute")}분 .${formData.get(
-    "year"
+    "year",
   )}`;
 
   const {
@@ -63,6 +63,7 @@ export async function postForm(formData: FormData) {
 
     await sql`INSERT INTO plan (user_id, friend_id, lat, lng, address, detailed_address, textfield, post_all, timetext, month, day, hour, minute, year) VALUES (${user_id}, ${friendIds}, ${lat}, ${lng}, ${address}, ${detailed_address}, ${textfield}, ${post_all}, ${timetext}, ${month}, ${day}, ${hour}, ${minute}, ${year})`;
   } catch (error) {
+    console.error(error);
     return {
       message: "Database Error: Failed to Post Form.",
     };

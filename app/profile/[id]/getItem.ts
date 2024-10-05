@@ -62,7 +62,7 @@ export async function submitComment(formData: FormData) {
 
 export async function attend(
   user_id: number | string,
-  plan_id: number | string
+  plan_id: number | string,
 ) {
   try {
     await sql`WITH upsert AS (

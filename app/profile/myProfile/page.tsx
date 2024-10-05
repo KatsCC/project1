@@ -21,7 +21,7 @@ export default async function myProfile() {
       plan.month - 1,
       plan.day,
       plan.hour,
-      plan.minute
+      plan.minute,
     );
     return planDate >= now;
   }).length;
@@ -32,7 +32,7 @@ export default async function myProfile() {
       plan.month - 1,
       plan.day,
       plan.hour,
-      plan.minute
+      plan.minute,
     );
     return planDate < now;
   }).length;

@@ -3,7 +3,6 @@
 import { signIn } from "@/auth";
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import { AuthError } from "next-auth";
 import bcrypt from "bcrypt";
 
@@ -32,7 +31,7 @@ export async function createUser(formData: FormData) {
 
 export async function authenticate(
   prevState: string | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   try {
     await signIn("credentials", formData);
