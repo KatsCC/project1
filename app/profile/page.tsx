@@ -70,7 +70,7 @@ export default async function Profile() {
   }));
 
   return (
-    <div className="h-full-dvh bg-gray-200">
+    <div className="h-full-dvh bg-gray-200 text-black">
       <div className="pb-[200px]">
         <div className="flex justify-between border-b border-gray-300 p-5 shadow-lg pl-6 pr-6 bg-white">
           <h1 className="text-2xl font-bold ">예정된 약속</h1>
