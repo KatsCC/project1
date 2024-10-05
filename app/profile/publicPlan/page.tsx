@@ -36,7 +36,7 @@ export default async function myProfile() {
   }));
 
   return (
-    <div className="h-full-dvh">
+    <div className="h-full-dvh text-black">
       <div className="bg-gray-200 pb-8">
         <div className="flex justify-between border-b border-gray-300 p-5 shadow-lg pl-6 pr-6 bg-white">
           <h1 className="text-2xl font-bold ">모두의 약속</h1>

@@ -1,9 +1,9 @@
-import LoginForm from "../ui/login-form";
+import LoginForm from "../ui/loginForm";
 import Link from "next/link";
 
 export default async function Login() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 text-black">
       <div className="w-[400px] bg-white shadow-md rounded-md overflow-hidden">
         <h2 className="mt-6 text-center text-2xl font-bold text-gray-900">
           로그인

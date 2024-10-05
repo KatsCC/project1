@@ -37,7 +37,7 @@ export default async function myProfile() {
     return planDate < now;
   }).length;
   return (
-    <div className="h-dvh bg-gray-200">
+    <div className="h-dvh bg-gray-200 text-black pb-[150px]">
       <div className="bg-white flex text-center font-bold border-b border-gray-300 pb-4 shadow">
         <h2 className="m-auto mt-6 text-2xl ">내 정보</h2>
       </div>

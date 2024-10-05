@@ -8,7 +8,7 @@ export default async function createPlan() {
   const session = await auth();
 
   return (
-    <div className="min-h-dvh flex items-center justify-center bg-gray-100">
+    <div className="min-h-dvh flex items-center justify-center bg-gray-100 text-black">
       <form
         className="bg-white p-8 rounded shadow-md w-full max-w-md mb-32 mt-12"
         action={postForm}

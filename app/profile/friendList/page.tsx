@@ -27,7 +27,7 @@ export default async function friendList() {
   }));
 
   return (
-    <div className="min-h-dvh bg-gray-100 flex flex-col items-center">
+    <div className="min-h-dvh bg-gray-100 flex flex-col items-center text-black">
       <div className="w-full max-w-md mt-10 mb-24 p-4 bg-white rounded-lg shadow">
         <h1 className="text-2xl font-bold text-center border-b border-gray-200 p-6">
           내 친구

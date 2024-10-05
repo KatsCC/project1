@@ -19,10 +19,7 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="color-scheme" content="light" />
       </head>
       <body className={`${notoSansKr.className} font-SandolGoSik`}>
