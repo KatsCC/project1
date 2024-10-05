@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const notoSansKr = Noto_Sans_KR({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "havePLANs",
@@ -16,7 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </head>
+      <body className={`${notoSansKr.className} font-SandolGoSik`}>
+        {children}
+      </body>
     </html>
   );
 }

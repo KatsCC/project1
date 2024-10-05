@@ -22,7 +22,7 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 focus:outline-none focus:border-customPurple"
                 id="email"
                 type="email"
                 name="email"
@@ -61,7 +61,7 @@ export default function LoginForm() {
               </label>
               <div className="relative">
                 <input
-                  className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                  className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 focus:outline-none focus:border-customPurple"
                   id="password"
                   type="password"
                   name="password"
@@ -136,10 +136,11 @@ export default function LoginForm() {
             로그인
           </button>
           <div className="flex h-8 items-end space-x-1">
-            {/* Add form errors here */}
             {errorMessage && (
               <>
-                <p className="text-sm text-red-500">{errorMessage}</p>
+                <p className="text-sm text-red-500">
+                  이메일 또는 비밀번호를 확인해 주세요.
+                </p>
               </>
             )}
           </div>

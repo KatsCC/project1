@@ -5,35 +5,76 @@ import ScrollBtn from "./ScrollBtn";
 import { getPlan } from "./getPlan";
 import { getFriendImage } from "./friendList/controlFriend";
 import { getName } from "./[id]/getItem";
+import { QueryResultRow } from "@vercel/postgres";
+
+export interface Plan {
+  id: number;
+  user_id: string;
+  friend_id: string[];
+  lat: string;
+  lng: string;
+  address: string;
+  detailed_address: string;
+  textfield: string;
+  post_all: string | null;
+  created_at: string;
+  timetext: string;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+  year: number;
+}
+export const mapToPlan = (row: QueryResultRow): Plan => ({
+  id: row.id,
+  user_id: row.user_id,
+  friend_id: row.friend_id,
+  lat: row.lat,
+  lng: row.lng,
+  address: row.address,
+  detailed_address: row.detailed_address,
+  textfield: row.textfield,
+  post_all: row.post_all ?? "",
+  created_at: row.created_at,
+  timetext: row.timetext,
+  month: row.month,
+  day: row.day,
+  hour: row.hour,
+  minute: row.minute,
+  year: row.year,
+});
 
 export default async function Profile() {
   const session = await auth();
-  const plans = await getPlan(session?.user?.id as string);
+  const queryResult = await getPlan(session?.user?.id as string);
 
-  const imagePromises = plans.map(async (val: any) => {
+  const plans = queryResult.map(mapToPlan);
+
+  const imagePromises = plans.map(async (val: Plan) => {
     const src = await getFriendImage(val.user_id);
     return src;
   });
-  const namePromises = plans.map(async (val: any) => {
+  const namePromises = plans.map(async (val: Plan) => {
     const src = await getName(val.user_id);
+
     return src;
   });
 
   const imageSrc = await Promise.all(imagePromises);
   const names = await Promise.all(namePromises);
 
-  const plansData = plans.map((val: any, idx: number) => ({
+  const plansData = plans.map((val: Plan, idx: number) => ({
     ...val,
     name: names[idx] || "none",
     image: imageSrc[idx] || "none",
   }));
 
   return (
-    <div className="h-full-dvh bg-gray-200 ">
-      <div className="h-dvh">
+    <div className="h-full-dvh bg-gray-200">
+      <div className="pb-[200px]">
         <div className="flex justify-between border-b border-gray-300 p-5 shadow-lg pl-6 pr-6 bg-white">
           <h1 className="text-2xl font-bold ">예정된 약속</h1>
-          <Link href={"/profile/createPlan"}>
+          <Link href={"/profile/createPlan"} aria-label="새 게시글 작성">
             <svg
               width="33"
               height="33"
@@ -56,13 +97,11 @@ export default async function Profile() {
           </Link>
         </div>
 
-        {/* <ClientProfile session={session} /> */}
-
-        <ul className="bg-white pt-8 pb-6 rounded-xl shadow-md w-full max-w-md mt-12 mx-auto mb-[90px]">
+        <ul className="bg-white pt-8 pb-6 pl-2 pr-2 rounded-xl shadow-md w-[100%] max-w-md mt-12 mx-auto overflow-x-hidden">
           {plansData.length === 0 ? (
-            <p className="text-center font-semibold">
+            <li className="text-center font-semibold">
               아직 아무 예정이 없습니다
-            </p>
+            </li>
           ) : (
             plansData
               .filter((plan, idx) => {
@@ -78,26 +117,24 @@ export default async function Profile() {
               })
               .map((val, idx) => {
                 return (
-                  <>
-                    <div key={idx + 100} className="w-[420px] mx-auto">
-                      <Link href={`/profile/${val.id}`}>
-                        <PlanList
-                          image={val.image}
-                          name={val.name}
-                          lat={val.lat}
-                          lng={val.lng}
-                          address={val.address}
-                          detailed_address={val.detailed_address}
-                          textfield={val.textfield}
-                          month={val.month}
-                          day={val.day}
-                          hour={val.hour}
-                          minute={val.minute}
-                          year={val.year}
-                        ></PlanList>
-                      </Link>
-                    </div>
-                  </>
+                  <li key={idx + 100} className="w-[100%] mx-auto ">
+                    <Link href={`/profile/${val.id}`}>
+                      <PlanList
+                        image={val.image}
+                        name={val.name}
+                        lat={val.lat}
+                        lng={val.lng}
+                        address={val.address}
+                        detailed_address={val.detailed_address}
+                        textfield={val.textfield}
+                        month={val.month}
+                        day={val.day}
+                        hour={val.hour}
+                        minute={val.minute}
+                        year={val.year}
+                      ></PlanList>
+                    </Link>
+                  </li>
                 );
               })
           )}

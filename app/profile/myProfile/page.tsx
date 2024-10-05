@@ -4,9 +4,13 @@ import ProfileItem from "./ProfileItem";
 import { UploadImage } from "./UploadImage";
 import { userImage, userName, userRotate } from "./uploadDB";
 import { getPlan } from "../getPlan";
+import { Session } from "next-auth";
 
 export default async function myProfile() {
-  const session: any = await auth();
+  const session: Session | null = await auth();
+  if (!session || !session.user || !session.user.id) {
+    return;
+  }
   const image = await userImage(session.user.id);
   const rotate = await userRotate(session.user.id);
   const name = await userName(session.user.id);
@@ -39,7 +43,7 @@ export default async function myProfile() {
         <h2 className="m-auto mt-6 text-2xl ">내 정보</h2>
       </div>
 
-      <div className="w-[420px] bg-white mx-auto border border-gray-200 rounded-xl flex mt-2 pb-8 pl-4">
+      <div className="w-[100%] max-w-[420px] min-w-[323px] bg-white mx-auto border border-gray-200 rounded-xl flex mt-2 pb-8 pl-4">
         <ProfileItem
           session={session}
           src={image}

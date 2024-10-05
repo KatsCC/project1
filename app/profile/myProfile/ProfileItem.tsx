@@ -8,6 +8,16 @@ import { userImage } from "./uploadDB";
 import { useState } from "react";
 import EditProfileModal from "./EditProfileModal";
 import Link from "next/link";
+import { Session } from "next-auth";
+
+interface ProfileItemProps {
+  session: Session;
+  src: string;
+  rotate: string;
+  name: string;
+  upcom: number;
+  past: number;
+}
 
 export default function ProfileItem({
   session,
@@ -16,7 +26,7 @@ export default function ProfileItem({
   name,
   upcom,
   past,
-}: any) {
+}: ProfileItemProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -27,7 +37,7 @@ export default function ProfileItem({
     setIsModalOpen(false);
   };
   return (
-    <div className="w-full">
+    <div className="w-full relative pb-16">
       <p className="font-bold text-2xl m-6 flex items-center border-b-2 border-gray-200 pb-6 justify-between">
         <span className="flex items-center">
           <img
@@ -70,7 +80,7 @@ export default function ProfileItem({
       </div>
 
       <button
-        className="bg-blue-300 text-white font-semibold p-1 rounded-lg ml-[300px] mt-8"
+        className="bg-blue-300 text-white font-semibold p-1 rounded-lg  mt-8 absolute right-6"
         onClick={() => signOut()}
       >
         로그아웃
@@ -86,12 +96,4 @@ export default function ProfileItem({
       )}
     </div>
   );
-}
-{
-  /* <button
-className="bg-green-300 text-white font-semibold p-1 rounded-lg ml-[10px] absolute top-0 mt-28 right-14"
-onClick={openModal}
->
-정보수정
-</button> */
 }

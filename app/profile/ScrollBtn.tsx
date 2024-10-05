@@ -15,6 +15,7 @@ export default function ScrollBtn() {
                   flex items-center justify-center text-xl cursor-pointer
                   "
         onClick={scrollToTop}
+        aria-label="페이지 맨 위로"
       >
         <div className="w-3 h-3 border-t-2 border-l-2 border-white transform rotate-45 bg-transparent translate-y-1/4"></div>
       </button>

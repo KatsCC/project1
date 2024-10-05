@@ -2,16 +2,25 @@
 import { useState } from "react";
 import { submitComment } from "./getItem";
 
-export default function SubmitComment({ user_id, id }: any) {
+interface SubmitId {
+  user_id: string | number;
+  id: string | number;
+}
+
+export default function SubmitComment({ user_id, id }: SubmitId) {
   const [text, setText] = useState("");
   return (
-    <form action={submitComment} className="flex" onSubmit={() => setText("")}>
+    <form
+      action={submitComment}
+      className="flex w-full"
+      onSubmit={() => setText("")}
+    >
       <textarea className="hidden" name="user_id" value={user_id} />
       <textarea className="hidden" name="plan_id" value={id} />
       <input
         name="text"
         type="text"
-        className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 w-80"
+        className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 w-[100%]"
         placeholder="댓글을 입력하기!"
         value={text}
         onChange={(e) => setText(e.target.value)}

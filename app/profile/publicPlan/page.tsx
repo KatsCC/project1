@@ -9,19 +9,22 @@ import ScrollBtn from "../ScrollBtn";
 import FilteredList from "./FilteredList";
 import { getFriendImage } from "../friendList/controlFriend";
 import { getName } from "../[id]/getItem";
+import { mapToPlan, Plan } from "../page";
 
 export default async function myProfile() {
   const session = await auth();
-  const plans = await getPublicPlan(session?.user?.id as string);
+  const queryResult = await getPublicPlan();
+  const plans = queryResult.map(mapToPlan);
+
   const regions = [
     ...new Set(plans.map((plan) => plan.address.trim().split(" ")[0])),
   ];
 
-  const imagePromises = plans.map(async (val: any) => {
+  const imagePromises = plans.map(async (val: Plan) => {
     const src = await getFriendImage(val.user_id);
     return src;
   });
-  const namePromises = plans.map(async (val: any) => {
+  const namePromises = plans.map(async (val: Plan) => {
     const src = await getName(val.user_id);
     return src;
   });
@@ -29,7 +32,7 @@ export default async function myProfile() {
   const imageSrc = await Promise.all(imagePromises);
   const names = await Promise.all(namePromises);
 
-  const plansData = plans.map((val: any, idx: number) => ({
+  const plansData = plans.map((val: Plan, idx: number) => ({
     ...val,
     name: names[idx] || "none",
     image: imageSrc[idx] || "none",
@@ -40,7 +43,7 @@ export default async function myProfile() {
       <div className="bg-gray-200 pb-8">
         <div className="flex justify-between border-b border-gray-300 p-5 shadow-lg pl-6 pr-6 bg-white">
           <h1 className="text-2xl font-bold ">모두의 약속</h1>
-          <Link href={"/profile/createPlan"}>
+          <Link href={"/profile/createPlan"} aria-label="새 게시글 작성">
             <svg
               width="33"
               height="33"

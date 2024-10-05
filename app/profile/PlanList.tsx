@@ -29,7 +29,7 @@ export default function PlanList({
   year: number;
 }) {
   return (
-    <li className="border border-gray-300 w-full h-40 rounded-lg flex overflow-hidden mb-3 shadow">
+    <div className="border border-gray-300 w-full h-40 rounded-lg flex overflow-hidden mb-3 shadow">
       <div className="flex flex-col h-full">
         <div className="flex items-center m-2 ml-2">
           <img
@@ -52,6 +52,6 @@ export default function PlanList({
           <MapCont lat={Number(lat)} lng={Number(lng)}></MapCont>
         </div>
       </div>
-    </li>
+    </div>
   );
 }

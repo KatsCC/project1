@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { auth } from "@/auth";
 import ListCom from "./ListCom";
-import { getFriend } from "../createPlan/getfriend";
+import { Friend, getFriend } from "../createPlan/getfriend";
 import AddFriend from "./AddFriend";
 import { getFriendImage } from "./controlFriend";
 
@@ -11,7 +11,7 @@ export default async function friendList() {
   const id = session?.user?.id;
   const arr: string[] = [];
 
-  const promises = friends.map(async (val: any) => {
+  const promises = friends.map(async (val: Friend) => {
     const src = await getFriendImage(val.id);
     return src;
   });
@@ -21,7 +21,7 @@ export default async function friendList() {
 
   arr.push(...results);
 
-  const friendsWithImages = friends.map((friend: any, idx: number) => ({
+  const friendsWithImages = friends.map((friend: Friend, idx: number) => ({
     ...friend,
     image: arr[idx] || "none",
   }));
@@ -87,15 +87,6 @@ export default async function friendList() {
         </div>
 
         <div className="mt-4 ">
-          {/* <div className="absolute translate-y-[80.5px] translate-x-[15px]">
-            {friends.map((val: any, idx: number) => {
-              return (
-                <div key={idx} className=" mb-[16.8px]">
-                  <ImageSrc id={val.id}></ImageSrc>
-                </div>
-              );
-            })}
-          </div> */}
           <ListCom friend={friendsWithImages} />
         </div>
       </div>

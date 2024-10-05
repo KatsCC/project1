@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { UploadImage } from "./UploadImage";
 import { updateData } from "./uploadDB";
+import { Session } from "next-auth";
+
+interface EditProfileModalProps {
+  session: Session;
+  name: string;
+  rotate: string;
+  closeModal: () => void;
+}
 
 export default function EditProfileModal({
   session,
   name,
   rotate,
   closeModal,
-}: any) {
+}: EditProfileModalProps) {
   const [names, setNames] = useState(name);
   const [location, setLocation] = useState(rotate); // 초기값 설정
+  if (!session || !session.user) {
+    return;
+  }
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
@@ -37,7 +48,7 @@ export default function EditProfileModal({
               className="w-full p-2 border border-gray-300 rounded mt-1"
             />
           </div>
-          <UploadImage session={session}></UploadImage>
+          <UploadImage></UploadImage>
           <div className="flex justify-end">
             <button
               type="button"

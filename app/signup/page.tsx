@@ -68,10 +68,10 @@ export default function Signup() {
               className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50 focus:outline-none"
             />
           </div>
-          <input type="checkbox" />
+          <input type="checkbox" aria-label="약관 동의" />
           <label className="text-sm"> 약관에 동의합니다</label>
           <br />
-          <input type="checkbox" />
+          <input type="checkbox" aria-label="정보제공 동의" />
           <label className="text-sm"> 개인정보 보호 정책에 동의합니다</label>
           <div>
             <button

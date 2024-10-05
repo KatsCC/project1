@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 
-export function UploadImage({ session }: any) {
+export function UploadImage() {
   const [imageBase64, setImageBase64] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,21 +13,15 @@ export function UploadImage({ session }: any) {
     if (file) {
       const reader = new FileReader();
 
-      // 파일 읽기 완료 핸들러
       reader.onloadend = () => {
         if (reader.result) {
-          // 결과가 Base64 데이터 URL로 변환됨
           setImageBase64(reader.result as string);
         }
       };
 
-      // 파일을 Base64 데이터 URL로 읽기 시작
       reader.readAsDataURL(file);
     }
   };
-  // const formData = new FormData();
-  // formData.append("image", selectedImage as any);
-  // formData.append("user_id", id);
 
   return (
     <div className="mb-4">

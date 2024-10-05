@@ -23,7 +23,9 @@ export default async function Comment({
   return (
     <div className="flex flex-col space-y-4">
       <div className="flex items-center space-x-2">
-        <SubmitComment user_id={session?.user?.id} id={id}></SubmitComment>
+        {session?.user?.id && (
+          <SubmitComment user_id={session.user.id} id={id}></SubmitComment>
+        )}
       </div>
       <div className="flex flex-col space-y-2">
         {comment &&

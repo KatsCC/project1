@@ -55,9 +55,16 @@ export default async function Page({ params }: { params: { id: string } }) {
           {`${item?.textfield}`}
         </p>
         <div className="flex items-center">
-          <AttendBtn user_id={session?.user?.id} plan_id={id} />
+          {session?.user?.id && (
+            <AttendBtn user_id={session.user.id} plan_id={id} />
+          )}
+
           {count.length > 0 ? (
-            <span className="font-semibold">{` #${firstName} 등 ${count.length}명이 참여한다고 합니다!`}</span>
+            <span className=" font-semibold">
+              {` #${firstName} 등 ${count.length} 명이`}
+              <br className="hidden show-on-small" />
+              {` 참여한다고 합니다!`}
+            </span>
           ) : (
             <span className="font-semibold"> 아직 아무도 없습니다...</span>
           )}

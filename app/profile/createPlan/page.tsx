@@ -7,7 +7,6 @@ import { postForm } from "./postForm";
 export default async function createPlan() {
   const session = await auth();
 
-  //타임스탬프도 만들어야 한다.
   return (
     <div className="min-h-dvh flex items-center justify-center bg-gray-100">
       <form
@@ -27,7 +26,7 @@ export default async function createPlan() {
           placeholder="내용을 입력하기!"
           name="textfield"
         ></textarea>
-        <Suggest session={session?.user?.id}></Suggest>
+        <Suggest session={session}></Suggest>
         <button
           type="submit"
           className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-500 transition duration-200"

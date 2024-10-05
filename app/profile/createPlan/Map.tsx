@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import {
@@ -7,14 +6,22 @@ import {
   MarkerF,
   StandaloneSearchBox,
 } from "@react-google-maps/api";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+interface LatLng {
+  lat: number;
+  lng: number;
+  address: string;
+}
+
+interface Marker extends LatLng {}
 
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
 };
 
-const center = {
+const center: LatLng = {
   lat: 37.56,
   lng: 126.9774,
   address: "",
@@ -22,7 +29,7 @@ const center = {
 
 const GEOCODING_API_URL = "https://maps.googleapis.com/maps/api/geocode/json";
 
-const fetchAddress = async (lat: number, lng: number) => {
+const fetchAddress = async (lat: number, lng: number): Promise<string> => {
   try {
     const response = await fetch(
       `${GEOCODING_API_URL}?latlng=${lat},${lng}&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`
@@ -39,9 +46,10 @@ const fetchAddress = async (lat: number, lng: number) => {
 };
 
 export default function Map() {
-  const [markers, setMarkers]: any = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState(center);
+  const [markers, setMarkers] = useState<Marker[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<LatLng>(center);
   const searchBoxRef = useRef<google.maps.places.SearchBox | null>(null);
+  const mapRef = useRef<google.maps.Map | null>(null);
 
   const onSBLoad = (ref: google.maps.places.SearchBox) => {
     searchBoxRef.current = ref;
@@ -57,25 +65,41 @@ export default function Map() {
     const place = places[0];
     if (!place.geometry || !place.geometry.location) return;
 
-    const latLng = {
+    const latLng: LatLng = {
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng(),
+      address: place.formatted_address || "No address found",
     };
-    const address = place.formatted_address || "No address found";
 
-    setMarkers([{ ...latLng, address }]);
-    setSelectedLocation({ ...latLng, address });
+    setMarkers([latLng]);
+    setSelectedLocation(latLng);
   };
 
-  const onMapClick = async (event: any) => {
-    const latLng = {
-      lat: event.latLng.lat(),
-      lng: event.latLng.lng(),
-    };
-    const address = await fetchAddress(latLng.lat, latLng.lng);
-    setMarkers([{ ...latLng, address: address }]);
-    setSelectedLocation({ ...latLng, address: address });
+  const onMapLoad = (map: google.maps.Map) => {
+    mapRef.current = map;
   };
+
+  const onMapClick = async (event: google.maps.MapMouseEvent) => {
+    if (!event.latLng) return;
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    const address = await fetchAddress(lat, lng);
+
+    const latLng: LatLng = {
+      lat: lat,
+      lng: lng,
+      address: address,
+    };
+
+    setMarkers([latLng]);
+    setSelectedLocation(latLng);
+  };
+
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.panTo(selectedLocation);
+    }
+  }, [selectedLocation]);
 
   return (
     <>
@@ -85,12 +109,13 @@ export default function Map() {
           libraries={["places"]}
         >
           <GoogleMap
+            onLoad={onMapLoad}
             mapContainerStyle={mapContainerStyle}
             center={selectedLocation}
             zoom={16}
             onClick={onMapClick}
           >
-            {markers.map((marker: any, index: any) => (
+            {markers.map((marker, index) => (
               <MarkerF key={index} position={marker} />
             ))}
             <div
@@ -113,18 +138,16 @@ export default function Map() {
                 <textarea readOnly>{selectedLocation.address}</textarea>
               </div>
             </div>
-            <>
-              <StandaloneSearchBox
-                onLoad={onSBLoad}
-                onPlacesChanged={onPlacesChanged}
-              >
-                <input
-                  type="text"
-                  placeholder="입력해서 찾기!"
-                  className="box-border border border-transparent w-[270px] h-[40px] px-3 rounded-[3px] shadow-md text-[14px] outline-none mx-auto truncate absolute top-[10px] left-1 transform -translate-x-2/1"
-                />
-              </StandaloneSearchBox>
-            </>
+            <StandaloneSearchBox
+              onLoad={onSBLoad}
+              onPlacesChanged={onPlacesChanged}
+            >
+              <input
+                type="text"
+                placeholder="입력해서 찾기!"
+                className="box-border border border-transparent max-w-[270px] w-[70%] h-[40px] px-3 rounded-[3px] shadow-md text-[14px] outline-none mx-auto truncate absolute top-[10px] left-1 transform -translate-x-2/1"
+              />
+            </StandaloneSearchBox>
           </GoogleMap>
         </LoadScriptNext>
       </div>
@@ -149,6 +172,7 @@ export default function Map() {
               ? selectedLocation.address.split(" ")[3]
               : ""
           }`}
+          aria-label="선택 주소"
         ></textarea>
         <input
           className=" mb-2 border border-gray-300 p-2 w-full rounded-lg font-semibold"

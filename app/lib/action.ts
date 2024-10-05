@@ -2,7 +2,6 @@
 
 import { signIn } from "@/auth";
 import { sql } from "@vercel/postgres";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { AuthError } from "next-auth";
@@ -13,14 +12,19 @@ const FormSchema = z.object({
   name: z.string(),
   password: z.string(),
 });
+interface Data {
+  userId: string;
+  name: string;
+  password: string;
+}
 
 export async function createUser(formData: FormData) {
-  const { userId, name, password }: any = {
-    userId: formData.get("userId")?.toString(),
-    name: formData.get("name")?.toString(),
-    password: formData.get("password")?.toString(),
+  const { userId, name, password }: Data = {
+    userId: formData.get("userId")?.toString() || "",
+    name: formData.get("name")?.toString() || "",
+    password: formData.get("password")?.toString() || "",
   };
-  const hashedPassword: any = await bcrypt.hash(password, 10);
+  const hashedPassword: string = await bcrypt.hash(password, 10);
   try {
     await sql`INSERT INTO users (email, name, password) VALUES (${userId}, ${name}, ${hashedPassword})`;
   } catch (error) {

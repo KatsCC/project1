@@ -1,15 +1,23 @@
 import { sql } from "@vercel/postgres";
 
-export async function getFriend(user_id: string) {
+export interface Friend {
+  name: string;
+  id: string;
+}
+
+export async function getFriend(user_id: string): Promise<Friend[]> {
   try {
     const friend = await sql`SELECT * FROM friends WHERE user_id=${user_id}`;
 
-    const friendList: any = [];
+    const friendList: Friend[] = [];
 
     for (let i = 0; i < friend.rows.length; i++) {
-      const name =
-        await sql`SELECT * FROM users WHERE id=${friend.rows[i].friend_id}`;
-      friendList.push({ name: name.rows[0].name, id: name.rows[0].id });
+      const userId = friend.rows[i].friend_id;
+      const name = await sql`SELECT name, id FROM users WHERE id=${userId}`;
+
+      if (name.rows.length > 0) {
+        friendList.push({ name: name.rows[0].name, id: name.rows[0].id });
+      }
     }
 
     return friendList;

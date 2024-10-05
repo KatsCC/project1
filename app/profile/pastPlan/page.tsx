@@ -5,16 +5,19 @@ import PlanList from "../PlanList";
 import ScrollBtn from "../ScrollBtn";
 import { getFriendImage } from "../friendList/controlFriend";
 import { getName } from "../[id]/getItem";
+import { mapToPlan, Plan } from "../page";
 
 export default async function pastPlan() {
   const session = await auth();
-  const plans = await getPlan(session?.user?.id as string);
+  const queryResult = await getPlan(session?.user?.id as string);
 
-  const imagePromises = plans.map(async (val: any) => {
+  const plans = queryResult.map(mapToPlan);
+
+  const imagePromises = plans.map(async (val: Plan) => {
     const src = await getFriendImage(val.user_id);
     return src;
   });
-  const namePromises = plans.map(async (val: any) => {
+  const namePromises = plans.map(async (val: Plan) => {
     const src = await getName(val.user_id);
     return src;
   });
@@ -22,7 +25,7 @@ export default async function pastPlan() {
   const imageSrc = await Promise.all(imagePromises);
   const names = await Promise.all(namePromises);
 
-  const plansData = plans.map((val: any, idx: number) => ({
+  const plansData = plans.map((val: Plan, idx: number) => ({
     ...val,
     name: names[idx] || "none",
     image: imageSrc[idx] || "none",
@@ -30,12 +33,12 @@ export default async function pastPlan() {
 
   return (
     <>
-      <div className="min-h-dvh bg-gray-200 ">
+      <div className="h-full-dvh bg-gray-200 pb-[200px]">
         <div className="flex justify-between border-b border-gray-300 p-5 shadow-lg pl-6 pr-6 bg-white">
           <h1 className="text-2xl font-bold ">지난 약속</h1>
         </div>
 
-        <ul className="bg-white pt-8 pb-6 rounded-xl shadow-md w-full max-w-md mb-32 mt-12 mx-auto">
+        <ul className="bg-white pt-8 pb-6 pl-2 pr-2 rounded-xl shadow-md w-full max-w-md mt-12 mx-auto">
           {plansData
             .filter((plan, idx) => {
               const now = new Date();
@@ -51,7 +54,7 @@ export default async function pastPlan() {
             .map((val, idx) => {
               return (
                 <>
-                  <div key={idx + 100} className="w-[420px] mx-auto">
+                  <li key={idx + 100} className="w-[100%] mx-auto ">
                     <Link href={`/profile/${val.id}`}>
                       <PlanList
                         image={val.image}
@@ -68,7 +71,7 @@ export default async function pastPlan() {
                         year={val.year}
                       ></PlanList>
                     </Link>
-                  </div>
+                  </li>
                 </>
               );
             })}

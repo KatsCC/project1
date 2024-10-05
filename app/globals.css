@@ -53,4 +53,28 @@ body {
 }
 html {
   overflow: overlay;
+  min-width: 349px;
+}
+
+input:focus {
+  border-color: rgb(147, 51, 234);
+  color: black;
+}
+
+input:focus {
+  @apply outline-none border-customPurple;
+}
+
+select:focus {
+  @apply outline-none border-customPurple;
+}
+
+textarea:focus {
+  @apply outline-none border-customPurple;
+}
+
+@media (max-width: 364px) {
+  .show-on-small {
+    display: inline;
+  }
 }

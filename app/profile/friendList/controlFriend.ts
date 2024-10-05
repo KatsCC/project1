@@ -29,7 +29,7 @@ export async function addFriend(formData: FormData) {
   redirect("friendList");
 }
 
-export async function getFriendImage(id: any) {
+export async function getFriendImage(id: string) {
   try {
     const image = await sql`SELECT * FROM user_image WHERE user_id=${id}`;
     return image.rows[0].image;

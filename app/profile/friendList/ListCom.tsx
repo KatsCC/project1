@@ -3,7 +3,13 @@
 import { useState } from "react";
 import FriendCom from "./FriendCom";
 
-export default function ListCom({ friend }: { friend: any }) {
+export interface FreindData {
+  name: string;
+  id: string;
+  image: string;
+}
+
+export default function ListCom({ friend }: { friend: FreindData[] }) {
   const [activeTab, setActiveTab] = useState("friends");
 
   return (
@@ -68,8 +74,10 @@ export default function ListCom({ friend }: { friend: any }) {
           그룹
         </button>
         <div
-          className={`absolute ml-2 mb-1 bottom-0 left-0 w-48 h-10 bg-white transition-transform duration-300 z-2 rounded-lg -translate-x-1 ${
-            activeTab === "groups" ? "ml-6 transform translate-x-[188px]" : ""
+          className={`absolute ml-2 mb-1 bottom-0 left-0 w-1/2 h-10 bg-white transition-transform duration-300 z-2 rounded-lg -translate-x-1 ${
+            activeTab === "groups"
+              ? "transform translate-x-[calc(100%-12.5px)]"
+              : ""
           }`}
         ></div>
       </div>
