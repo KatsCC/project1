@@ -144,7 +144,7 @@ export default function Map() {
               <input
                 type="text"
                 placeholder="입력해서 찾기!"
-                className="box-border border border-transparent max-w-[270px] w-[70%] h-[40px] px-3 rounded-[3px] shadow-md text-[14px] outline-none mx-auto absolute top-[10px] left-1"
+                className="box-border border border-transparent max-w-[270px] w-[70%] h-[40px] px-3 rounded-[3px] shadow-md text-[16px] outline-none mx-auto absolute top-[10px] left-1"
               />
             </StandaloneSearchBox>
           </GoogleMap>
