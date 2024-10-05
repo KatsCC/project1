@@ -9,7 +9,7 @@ export default async function createPlan() {
 
   //타임스탬프도 만들어야 한다.
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-dvh flex items-center justify-center bg-gray-100">
       <form
         className="bg-white p-8 rounded shadow-md w-full max-w-md mb-32 mt-12"
         action={postForm}

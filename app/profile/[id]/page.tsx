@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const firstName = await getName(count[0]?.user_id);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-dvh flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md mb-32 mt-12">
         <div className="flex items-center font-semibold border-b-2 border-gray-300 pb-3 mb-3 text-xl">
           <img

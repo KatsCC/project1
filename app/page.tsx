@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-purple-500">
+    <main className="flex min-h-dvh flex-col items-center justify-center p-24 bg-purple-500">
       <div className="text-white animate-bounce font-bold text-5xl">
         <h1>Have</h1>
         <h1>PLANs</h1>

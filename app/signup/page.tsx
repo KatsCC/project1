@@ -2,7 +2,7 @@ import { createUser } from "../lib/action";
 
 export default function Signup() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-dvh flex items-center justify-center bg-gray-100">
       <div className="w-[400px] bg-white shadow-md rounded-md overflow-hidden">
         <h2 className="mt-6 text-center text-2xl font-bold text-gray-900">
           회원가입
