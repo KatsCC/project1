@@ -10,7 +10,6 @@ import { mapToPlan, Plan } from "../page";
 export default async function pastPlan() {
   const session = await auth();
   const queryResult = await getPlan(session?.user?.id as string);
-
   const plans = queryResult.map(mapToPlan);
 
   const imagePromises = plans.map(async (val: Plan) => {
