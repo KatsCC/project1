@@ -8,7 +8,7 @@ const notoSansKr = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: "HavePLANs",
-  description: "HavePLANs",
+  description: "HavePLANs는 사람들 끼리 약속을 만들어 공유하는 플랫폼입니다.",
   icons: {
     icon: "/favicon.png",
   },
